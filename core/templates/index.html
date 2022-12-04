@@ -1,0 +1,42 @@
+{% extends 'layouts/app.html' %}
+{% block title %} Home Page {% endblock %}
+{% block content %}
+<div class="d-flex align-items-center flex-column">
+    <div class="card border-light md-3" style="width: 60rem; margin-top: 15px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for user in users %}
+                <tr>
+                    <th scope="row">{{user.id}}</th>
+                    <td> {{user.email}}</td>
+                    <td> {{user.username}}</td>
+                    <td> {{user.first_name}}</td>
+                    <td> {{user.last_name}}</td>
+                    <td><a href="{% url 'editar' user.id %}" class="btn btn-dark" >editar</a>
+                        <a href="{% url 'delete' user.id %}" class="btn btn-dark" >delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+            create new user
+          </button>
+
+        {% include 'modals/registerModal.html' %}
+    </div>
+</div>
+{% endblock %}
